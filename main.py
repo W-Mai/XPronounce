@@ -1,5 +1,6 @@
 import os
 import requests
+import argparse
 
 
 class Youdao(object):
@@ -38,5 +39,15 @@ class Youdao(object):
 
 
 if __name__ == "__main__":
-    yd = Youdao(word='consumer')
-    yd.down()
+    # yd = Youdao(word='consumer')
+    # yd.down()
+    parser = argparse.ArgumentParser()
+    parser.add_argument('word', type=str,
+                        help='the WORD you wanna pronounce.')
+    parser.add_argument('-a', type=str, default='EN', choices=['EN', 'US'],
+                        help='accent.')
+
+    args = parser.parse_args()
+
+    yd = Youdao(word=args.word, en_us={'EN': 0, 'US': 1}.get(args.a))
+    print(yd.down())
