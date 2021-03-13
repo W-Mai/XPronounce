@@ -1,6 +1,7 @@
 import os
 import requests
 import argparse
+import playsound
 
 
 class Youdao(object):
@@ -39,8 +40,6 @@ class Youdao(object):
 
 
 if __name__ == "__main__":
-    # yd = Youdao(word='consumer')
-    # yd.down()
     parser = argparse.ArgumentParser()
     parser.add_argument('word', type=str,
                         help='the WORD you wanna pronounce.')
@@ -50,4 +49,5 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     yd = Youdao(word=args.word, en_us={'EN': 0, 'US': 1}.get(args.a))
-    print(yd.down())
+    file = yd.down()
+    playsound.playsound(file)
